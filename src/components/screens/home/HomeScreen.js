@@ -13,7 +13,6 @@ const HomeScreen = (props) => {
     const dispatch = useDispatch();
     const toDoList = useSelector(selectToDoList);
     const [taskText, setTaskText] = useState("");
-    const [editText, SetEditText] = useState("");
     const [date, setDate] = useState(new Date());
     const [selectedItem, setSelectedItem] = useState([]);
     const [displayEditModal, setDisplayEditModal] = useState(false);
@@ -40,12 +39,10 @@ const HomeScreen = (props) => {
     const OnEditItem = async (title, date) => {
         let allToDodata = [...toDoList]
         allToDodata = allToDodata.map((item) => item.id == selectedItem.id ? { ...item, title: title, dateTime: date } : item);
-        console.log("allToDodata:", allToDodata);
+        setDisplayEditModal(false);
         await dispatch(setToDotListData(allToDodata)) // setToDoList(allToDodata);
         setSelectedItem([]);
-        SetEditText("");
         setDate(new Date())
-        setDisplayEditModal(false);
     };
 
     async function onDelete(id) {
@@ -103,7 +100,6 @@ const HomeScreen = (props) => {
                                 style={[HomeStyles.actionButton, { backgroundColor: COLORS.GREEN }]}
                                 onPress={async () => {
                                     await setSelectedItem(item);
-                                    await SetEditText(item.title);
                                     setDisplayEditModal(true);
                                 }}
                             >
@@ -136,6 +132,7 @@ const HomeScreen = (props) => {
 
     // Function to render the edit modal
     const SelectedTypeModal = () => {
+        const [editText, SetEditText] = useState(selectedItem.title ?? "")
         const [selectedDate, setSelectedDate] = useState(selectedItem.dateTime ?? new Date())
         return (
             <Modal
