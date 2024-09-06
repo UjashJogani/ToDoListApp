@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS, FS } from '../../../../constants';
 
 const ToDoApiStyles = StyleSheet.create({
     container: {

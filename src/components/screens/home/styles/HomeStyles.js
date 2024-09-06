@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS, FS } from '../../../../constants';
 
 const HomeStyles = StyleSheet.create({
     container: {
@@ -49,7 +50,6 @@ const HomeStyles = StyleSheet.create({
         width: '100%',
         padding: 10,
         marginVertical: 5,
-        // flexDirection: 'row',
         borderRadius: 10,
         alignItems: 'center'
     },
